@@ -38,7 +38,7 @@ public class UserEntityRestController {
 
     @PostMapping("/users")
     public UserEntity addUserEntity(@RequestBody UserEntity theUserEntity){
-        theUserEntity.setUserId(0);
+        theUserEntity.setUserEntityId(0);
         UserEntity dbUserEntity = userEntityService.save(theUserEntity);
         return dbUserEntity;
     }
