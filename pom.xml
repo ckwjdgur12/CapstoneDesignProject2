@@ -49,6 +49,7 @@
 		</dependency>
 		<!-- End of my security dependencies -->
 
+
 		<!-- Add MariaDb dependency -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
