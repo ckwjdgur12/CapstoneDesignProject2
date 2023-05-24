@@ -1,4 +1,4 @@
-package kr.ac.knu.CapstoneDesignProject2.security;
+package kr.ac.knu.CapstoneDesignProject2.security.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

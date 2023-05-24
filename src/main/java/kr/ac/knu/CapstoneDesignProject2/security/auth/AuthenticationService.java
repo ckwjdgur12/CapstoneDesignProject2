@@ -1,16 +1,13 @@
-package kr.ac.knu.CapstoneDesignProject2.security;
+package kr.ac.knu.CapstoneDesignProject2.security.auth;
 
 import kr.ac.knu.CapstoneDesignProject2.dao.UserEntityRepository;
 import kr.ac.knu.CapstoneDesignProject2.entity.UserEntity;
+import kr.ac.knu.CapstoneDesignProject2.security.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor

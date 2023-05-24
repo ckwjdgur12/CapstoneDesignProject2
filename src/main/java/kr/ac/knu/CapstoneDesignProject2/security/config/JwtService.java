@@ -1,4 +1,4 @@
-package kr.ac.knu.CapstoneDesignProject2.security;
+package kr.ac.knu.CapstoneDesignProject2.security.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

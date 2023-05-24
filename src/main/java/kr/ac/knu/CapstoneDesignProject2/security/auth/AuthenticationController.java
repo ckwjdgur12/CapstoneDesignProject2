@@ -1,4 +1,4 @@
-package kr.ac.knu.CapstoneDesignProject2.security;
+package kr.ac.knu.CapstoneDesignProject2.security.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
