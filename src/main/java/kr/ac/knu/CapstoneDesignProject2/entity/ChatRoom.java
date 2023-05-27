@@ -26,6 +26,9 @@ public class ChatRoom {
     @Column(name="chatRoomTitle")
     private String chatRoomTitle;
 
+    @Column(name="tag")
+    private String tag;
+
     @CreationTimestamp
     @Column(name = "createAt", updatable = false)
     private LocalDateTime createAt;
@@ -52,6 +55,13 @@ public class ChatRoom {
         this.chatRoomTitle = chatRoomTitle;
         this.theCategory = theCategory;
         this.theUser = theUser;
+    }
+
+    public ChatRoom(String chatRoomTitle, Category theCategory, UserEntity theUser, String theTag) {
+        this.chatRoomTitle = chatRoomTitle;
+        this.theCategory = theCategory;
+        this.theUser = theUser;
+        this.tag = theTag;
     }
 
 }
