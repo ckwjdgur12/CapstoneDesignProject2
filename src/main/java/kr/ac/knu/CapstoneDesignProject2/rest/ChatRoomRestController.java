@@ -20,8 +20,8 @@ public class ChatRoomRestController {
     }
 
     @GetMapping("/chatrooms")
-    public List<ChatRoom> findAll() {
-        return chatRoomService.findAll();
+    public List<ChatRoom> getAllChatRoomsOrderByUpdatedAt() {
+        return chatRoomService.getAllChatRoomsOrderByUpdatedAt();
     }
 
     @GetMapping("/chatrooms/{chatRoomId}")

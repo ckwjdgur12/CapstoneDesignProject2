@@ -18,11 +18,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     }
 
     @Override
-    public List<ChatRoom> findAll() {
-        return chatRoomRepository.findAll();
-    }
-
-    @Override
     public ChatRoom findById(int theId) {
 
         Optional<ChatRoom> result = chatRoomRepository.findById(theId);
@@ -51,5 +46,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         chatRoomRepository.deleteById(theId);
     }
 
-
+    @Override
+    public List<ChatRoom> getAllChatRoomsOrderByUpdatedAt() {
+        return chatRoomRepository.getAllChatRoomsOrderByUpdatedAt();
+    }
 }
