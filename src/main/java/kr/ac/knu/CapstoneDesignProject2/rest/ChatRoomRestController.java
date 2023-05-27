@@ -24,6 +24,11 @@ public class ChatRoomRestController {
         return chatRoomService.getAllChatRoomsOrderByUpdatedAt();
     }
 
+    @GetMapping("/chatrooms/categories/{categoryId}")
+    public List<ChatRoom> getChatRoomsByCategoryId(@PathVariable int categoryId) {
+        return chatRoomService.getChatRoomsByCategoryId(categoryId);
+    }
+
     @GetMapping("/chatrooms/{chatRoomId}")
     public ChatRoom getChatRoom(@PathVariable int chatRoomId) {
 

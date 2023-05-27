@@ -14,4 +14,6 @@ public interface ChatRoomService {
 
     List<ChatRoom> getAllChatRoomsOrderByUpdatedAt();
 
+    List<ChatRoom> getChatRoomsByCategoryId(int categoryId);
+
 }

@@ -1,6 +1,7 @@
 package kr.ac.knu.CapstoneDesignProject2.service.Implements;
 
 import kr.ac.knu.CapstoneDesignProject2.dao.ChatRoomRepository;
+import kr.ac.knu.CapstoneDesignProject2.entity.Category;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomService;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     public List<ChatRoom> getAllChatRoomsOrderByUpdatedAt() {
         return chatRoomRepository.getAllChatRoomsOrderByUpdatedAt();
+    }
+
+    @Override
+    public List<ChatRoom> getChatRoomsByCategoryId(int categoryId) {
+        Category theCategory = new Category();
+        theCategory.setCategoryId(categoryId);
+        return chatRoomRepository.findAllByTheCategoryOrderByUpdateAtDesc(theCategory);
     }
 }
