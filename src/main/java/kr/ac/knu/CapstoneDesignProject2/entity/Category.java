@@ -1,9 +1,12 @@
 package kr.ac.knu.CapstoneDesignProject2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name="Category")
@@ -19,6 +22,10 @@ public class Category {
 
     @Column(name="categoryName")
     private String categoryName;
+
+    @OneToMany(mappedBy = "theCategory")
+    @JsonIgnore
+    private List<ChatRoom> chatRooms;
 
     public Category() {
 
