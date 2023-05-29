@@ -1,5 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
+import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomService;
@@ -20,19 +21,19 @@ public class ChatRoomRestController {
     }
 
     @GetMapping("/chatrooms")
-    public List<ChatRoom> getAllChatRoomsOrderByUpdatedAt() {
+    public List<ChatRoomDTO> getAllChatRoomsOrderByUpdatedAt() {
         return chatRoomService.getAllChatRoomsOrderByUpdatedAt();
     }
 
     @GetMapping("/chatrooms/categories/{categoryId}")
-    public List<ChatRoom> getChatRoomsByCategoryId(@PathVariable int categoryId) {
+    public List<ChatRoomDTO> getChatRoomsByCategoryId(@PathVariable int categoryId) {
         return chatRoomService.getChatRoomsByCategoryId(categoryId);
     }
 
     @GetMapping("/chatrooms/{chatRoomId}")
-    public ChatRoom getChatRoom(@PathVariable int chatRoomId) {
+    public ChatRoomDTO getChatRoom(@PathVariable int chatRoomId) {
 
-        ChatRoom theChatRoom = chatRoomService.findById(chatRoomId);
+        ChatRoomDTO theChatRoom = chatRoomService.findById(chatRoomId);
 
         if (theChatRoom == null) {
             throw new MyNotFoundException("ChatRoom id not found - " + chatRoomId);
@@ -59,7 +60,7 @@ public class ChatRoomRestController {
     @DeleteMapping("/chatrooms/{chatRoomId}")
     public String deleteChatRoom(@PathVariable int chatRoomId) {
 
-        ChatRoom tmpChatRoom = chatRoomService.findById(chatRoomId);
+        ChatRoomDTO tmpChatRoom = chatRoomService.findById(chatRoomId);
 
         if (tmpChatRoom == null) {
             throw new MyNotFoundException("ChatRoom id not found - " + chatRoomId);
