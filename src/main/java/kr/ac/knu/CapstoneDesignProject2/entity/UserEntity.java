@@ -1,5 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Builder
@@ -39,6 +41,10 @@ public class UserEntity implements UserDetails{
     @UpdateTimestamp
     @Column(name = "updateAt")
     private LocalDateTime updateAt;
+
+    @OneToMany(mappedBy = "theUserEntity")
+    @JsonIgnore
+    private List<MyChatRoom> myChatRooms;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
