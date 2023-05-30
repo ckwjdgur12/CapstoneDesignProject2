@@ -1,5 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
+import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomTagDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoomTag;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomTagService;
@@ -20,14 +21,14 @@ public class ChatRoomTagRestController {
     }
 
     @GetMapping("/chatroomtags")
-    public List<ChatRoomTag> findAll() {
+    public List<ChatRoomTagDTO> findAll() {
         return chatRoomTagService.findAll();
     }
 
     @GetMapping("/chatroomtags/{chatRoomTagId}")
-    public ChatRoomTag getChatRoomTag(@PathVariable int chatRoomTagId) {
+    public ChatRoomTagDTO getChatRoomTag(@PathVariable int chatRoomTagId) {
 
-        ChatRoomTag theChatRoomTag = chatRoomTagService.findById(chatRoomTagId);
+        ChatRoomTagDTO theChatRoomTag = chatRoomTagService.findById(chatRoomTagId);
 
         if (theChatRoomTag == null) {
             throw new MyNotFoundException("ChatRoomTag id not found - " + chatRoomTagId);
@@ -54,7 +55,7 @@ public class ChatRoomTagRestController {
     @DeleteMapping("/chatroomtags/{chatRoomTagId}")
     public String deleteChatRoomTag(@PathVariable int chatRoomTagId) {
 
-        ChatRoomTag tmpChatRoomTag = chatRoomTagService.findById(chatRoomTagId);
+        ChatRoomTagDTO tmpChatRoomTag = chatRoomTagService.findById(chatRoomTagId);
 
         if (tmpChatRoomTag == null) {
             throw new MyNotFoundException("ChatRoomTag id not found - " + chatRoomTagId);
