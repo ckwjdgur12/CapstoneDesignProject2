@@ -3,19 +3,19 @@ package kr.ac.knu.CapstoneDesignProject2.service.Implements;
 import kr.ac.knu.CapstoneDesignProject2.dao.UserEntityRepository;
 import kr.ac.knu.CapstoneDesignProject2.entity.UserEntity;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.UserEntityService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserEntityServiceImpl implements UserEntityService {
 
-    private UserEntityRepository userEntityRepository;
-
-    public UserEntityServiceImpl(UserEntityRepository userEntityRepository) {
-        this.userEntityRepository = userEntityRepository;
-    }
+    private final UserEntityRepository userEntityRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserEntity> findAll() {
@@ -43,6 +43,7 @@ public class UserEntityServiceImpl implements UserEntityService {
 
     @Override
     public UserEntity save(UserEntity theUserEntity) {
+        theUserEntity.setPassword(passwordEncoder.encode(theUserEntity.getPassword()));
         return userEntityRepository.save(theUserEntity);
     }
 
