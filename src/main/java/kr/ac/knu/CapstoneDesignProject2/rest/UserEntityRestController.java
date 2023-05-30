@@ -36,12 +36,15 @@ public class UserEntityRestController {
         return theUserEntity;
     }
 
+    /** Post at api/v1/auth/register */
+    /*
     @PostMapping("/users")
     public UserEntity addUserEntity(@RequestBody UserEntity theUserEntity){
         theUserEntity.setUserEntityId(0);
         UserEntity dbUserEntity = userEntityService.save(theUserEntity);
         return dbUserEntity;
     }
+    */
 
     @PutMapping("/users")
     public UserEntity updateUserEntity(@RequestBody UserEntity theUserEntity) {
