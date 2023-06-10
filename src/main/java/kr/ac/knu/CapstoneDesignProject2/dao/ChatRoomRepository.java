@@ -1,13 +1,12 @@
 package kr.ac.knu.CapstoneDesignProject2.dao;
 
-import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.Category;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer> {
 
@@ -16,4 +15,5 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer> {
 
     List<ChatRoom> findAllByTheCategoryOrderByUpdateAtDesc(Category category);
 
+    Optional<ChatRoom> findByChatRoomTitle(String chatRoomTitle);
 }

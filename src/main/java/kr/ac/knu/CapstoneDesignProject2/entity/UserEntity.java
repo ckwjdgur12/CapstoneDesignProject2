@@ -81,15 +81,4 @@ public class UserEntity implements UserDetails{
         return true;
     }
 
-
-//    public UserEntity() {
-//
-//    }
-//
-//    public UserEntity(String userId, String password, String name) {
-//        this.userId = userId;
-//        this.password = password;
-//        this.name = name;
-//    }
-
 }

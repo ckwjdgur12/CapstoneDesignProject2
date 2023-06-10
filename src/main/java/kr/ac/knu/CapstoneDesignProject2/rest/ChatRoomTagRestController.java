@@ -1,6 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
-import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomTagDTO;
+import kr.ac.knu.CapstoneDesignProject2.dto.response.ChatRoomTagDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoomTag;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomTagService;

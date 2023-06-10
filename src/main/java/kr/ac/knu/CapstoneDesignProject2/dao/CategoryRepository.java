@@ -14,7 +14,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query("SELECT c.categoryId, c.categoryName, COUNT(cr) " +
             "FROM Category c LEFT JOIN c.chatRooms cr " +
-            "GROUP BY c.categoryId, c.categoryName")
+            "GROUP BY c.categoryId, c.categoryName " +
+            "ORDER BY COUNT(cr) DESC")
     List<Object[]> getAllCategoriesWithChatRoomCount();
 
 }

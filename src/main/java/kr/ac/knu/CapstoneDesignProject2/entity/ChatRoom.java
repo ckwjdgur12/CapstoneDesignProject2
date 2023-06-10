@@ -10,6 +10,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="ChatRoom")
@@ -25,9 +28,6 @@ public class ChatRoom {
 
     @Column(name="chatRoomTitle")
     private String chatRoomTitle;
-
-    @Column(name="tag")
-    private String tag;
 
     @CreationTimestamp
     @Column(name = "createAt", updatable = false)
@@ -47,6 +47,9 @@ public class ChatRoom {
     // @JsonIgnore
     private UserEntity theUser;
 
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
+    private List<ChatRoomTag> chatRoomTags;
+
     public ChatRoom() {
 
     }
@@ -55,13 +58,6 @@ public class ChatRoom {
         this.chatRoomTitle = chatRoomTitle;
         this.theCategory = theCategory;
         this.theUser = theUser;
-    }
-
-    public ChatRoom(String chatRoomTitle, Category theCategory, UserEntity theUser, String theTag) {
-        this.chatRoomTitle = chatRoomTitle;
-        this.theCategory = theCategory;
-        this.theUser = theUser;
-        this.tag = theTag;
     }
 
 }

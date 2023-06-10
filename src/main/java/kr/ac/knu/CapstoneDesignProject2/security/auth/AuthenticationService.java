@@ -32,7 +32,7 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseWithUserInfo authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                     request.getUserId(),
@@ -42,8 +42,9 @@ public class AuthenticationService {
         var user = repository.findByUserId(request.getUserId())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseWithUserInfo.builder()
                 .token(jwtToken)
+                .userEntity(user)
                 .build();
     }
 }

@@ -1,10 +1,12 @@
 package kr.ac.knu.CapstoneDesignProject2.service.Implements;
 
 import kr.ac.knu.CapstoneDesignProject2.dao.ChatRoomTagRepository;
-import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomTagDTO;
+import kr.ac.knu.CapstoneDesignProject2.dto.response.ChatRoomTagDTO;
+import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoomTag;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomTagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +29,8 @@ public class ChatRoomTagServiceImpl implements ChatRoomTagService {
         return chatRoomTags.stream()
                 .map(theChatRoomTag -> new ChatRoomTagDTO(
                     theChatRoomTag.getTagTableId(),
-                    theChatRoomTag.getTheChatRoom().getChatRoomId(),
-                    theChatRoomTag.getTheChatRoom().getChatRoomTitle(),
+                    theChatRoomTag.getChatRoom().getChatRoomId(),
+                    theChatRoomTag.getChatRoom().getChatRoomTitle(),
                     theChatRoomTag.getTheTag().getTagId(),
                     theChatRoomTag.getTheTag().getTag()
                 )).collect(Collectors.toList());
@@ -51,11 +53,16 @@ public class ChatRoomTagServiceImpl implements ChatRoomTagService {
 
         return new ChatRoomTagDTO(
                 theChatRoomTag.getTagTableId(),
-                theChatRoomTag.getTheChatRoom().getChatRoomId(),
-                theChatRoomTag.getTheChatRoom().getChatRoomTitle(),
+                theChatRoomTag.getChatRoom().getChatRoomId(),
+                theChatRoomTag.getChatRoom().getChatRoomTitle(),
                 theChatRoomTag.getTheTag().getTagId(),
                 theChatRoomTag.getTheTag().getTag()
         );
+    }
+
+    @Override
+    public List<ChatRoomTag> findByChatRoom(ChatRoom theChatRoom) {
+        return chatRoomTagRepository.findByChatRoom(theChatRoom);
     }
 
     @Override
@@ -68,5 +75,10 @@ public class ChatRoomTagServiceImpl implements ChatRoomTagService {
         chatRoomTagRepository.deleteById(theId);
     }
 
+    @Override
+    @Transactional
+    public void deleteByChatRoom(ChatRoom theChatRoom){
+        chatRoomTagRepository.deleteByChatRoom(theChatRoom);
+    }
 
 }

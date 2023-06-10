@@ -1,6 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
-import kr.ac.knu.CapstoneDesignProject2.dto.CategoryDTO;
+import kr.ac.knu.CapstoneDesignProject2.dto.response.CategoryDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.Category;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.CategoryService;

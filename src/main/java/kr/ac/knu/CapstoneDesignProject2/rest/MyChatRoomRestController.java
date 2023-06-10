@@ -1,5 +1,6 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
+import kr.ac.knu.CapstoneDesignProject2.dto.response.MyChatRoomDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.MyChatRoom;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.MyChatRoomService;
@@ -20,14 +21,14 @@ public class MyChatRoomRestController {
     }
 
     @GetMapping("/mychatrooms")
-    public List<MyChatRoom> findAll() {
+    public List<MyChatRoomDTO> findAll() {
         return myChatRoomService.findAll();
     }
 
     @GetMapping("/mychatrooms/{myChatRoomId}")
-    public MyChatRoom getMyChatRoom(@PathVariable int myChatRoomId) {
+    public MyChatRoomDTO getMyChatRoom(@PathVariable int myChatRoomId) {
 
-        MyChatRoom theMyChatRoom = myChatRoomService.findById(myChatRoomId);
+        MyChatRoomDTO theMyChatRoom = myChatRoomService.findById(myChatRoomId);
 
         if (theMyChatRoom == null) {
             throw new MyNotFoundException("MyChatRoom id not found - " + myChatRoomId);
@@ -36,25 +37,30 @@ public class MyChatRoomRestController {
         return theMyChatRoom;
     }
 
+    @GetMapping("/mychatrooms/user/{userEntityId}")
+    public List<MyChatRoomDTO> getMyChatRoomByUser(@PathVariable int userEntityId) {
+        return myChatRoomService.findByUserEntity(userEntityId);
+    }
+
     @PostMapping("/mychatrooms")
-    public MyChatRoom addMyChatRoom(@RequestBody MyChatRoom theMyChatRoom){
+    public MyChatRoomDTO addMyChatRoom(@RequestBody MyChatRoom theMyChatRoom){
         theMyChatRoom.setMyChatRoomTableId(0);
         MyChatRoom dbMyChatRoom = myChatRoomService.save(theMyChatRoom);
-        return dbMyChatRoom;
+        return myChatRoomService.findById(dbMyChatRoom.getMyChatRoomTableId());
     }
 
     @PutMapping("/mychatrooms")
-    public MyChatRoom updateMyChatRoom(@RequestBody MyChatRoom theMyChatRoom) {
+    public MyChatRoomDTO updateMyChatRoom(@RequestBody MyChatRoom theMyChatRoom) {
 
         MyChatRoom dbMyChatRoom = myChatRoomService.save(theMyChatRoom);
 
-        return dbMyChatRoom;
+        return myChatRoomService.findById(dbMyChatRoom.getMyChatRoomTableId());
     }
 
     @DeleteMapping("/mychatrooms/{myChatRoomId}")
     public String deleteMyChatRoom(@PathVariable int myChatRoomId) {
 
-        MyChatRoom tmpMyChatRoom = myChatRoomService.findById(myChatRoomId);
+        MyChatRoomDTO tmpMyChatRoom = myChatRoomService.findById(myChatRoomId);
 
         if (tmpMyChatRoom == null) {
             throw new MyNotFoundException("MyChatRoom id not found - " + myChatRoomId);

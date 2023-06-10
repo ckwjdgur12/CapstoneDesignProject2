@@ -21,10 +21,10 @@ public class ChatRoomTag {
     @Column(name="tagTableId")
     private int tagTableId;
 
-    @ManyToOne
-    @JoinColumn(name="chatroomId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="chatRoomId")
     // @JsonIgnore
-    private ChatRoom theChatRoom;
+    private ChatRoom chatRoom;
 
     @ManyToOne
     @JoinColumn(name="tagId")
@@ -36,7 +36,7 @@ public class ChatRoomTag {
     }
 
     public ChatRoomTag(ChatRoom theChatRoom, Tag theTag) {
-        this.theChatRoom = theChatRoom;
+        this.chatRoom = theChatRoom;
         this.theTag = theTag;
     }
 

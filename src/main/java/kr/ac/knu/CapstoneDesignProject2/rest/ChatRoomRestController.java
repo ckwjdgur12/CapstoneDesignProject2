@@ -1,6 +1,7 @@
 package kr.ac.knu.CapstoneDesignProject2.rest;
 
-import kr.ac.knu.CapstoneDesignProject2.dto.ChatRoomDTO;
+import kr.ac.knu.CapstoneDesignProject2.dto.request.ChatRoomRequestDTO;
+import kr.ac.knu.CapstoneDesignProject2.dto.response.ChatRoomDTO;
 import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
 import kr.ac.knu.CapstoneDesignProject2.rest.exceptionHandler.MyNotFoundException;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomService;
@@ -42,18 +43,27 @@ public class ChatRoomRestController {
         return theChatRoom;
     }
 
+    @GetMapping("/chatrooms/search/{chatRoomTitle}")
+    public ChatRoomDTO getChatRoom(@PathVariable String chatRoomTitle) {
+
+        ChatRoomDTO theChatRoom = chatRoomService.findByChatRoomTitle(chatRoomTitle);
+
+        if (theChatRoom == null) {
+            throw new MyNotFoundException("ChatRoom not found - " + chatRoomTitle);
+        }
+
+        return theChatRoom;
+    }
+
     @PostMapping("/chatrooms")
-    public ChatRoom addChatRoom(@RequestBody ChatRoom theChatRoom){
-        theChatRoom.setChatRoomId(0);
-        ChatRoom dbChatRoom = chatRoomService.save(theChatRoom);
+    public ChatRoom addChatRoom(@RequestBody ChatRoomRequestDTO chatRoomRequestDTO){
+        ChatRoom dbChatRoom = chatRoomService.addChatRoom(chatRoomRequestDTO);
         return dbChatRoom;
     }
 
-    @PutMapping("/chatrooms")
-    public ChatRoom updateChatRoom(@RequestBody ChatRoom theChatRoom) {
-
-        ChatRoom dbChatRoom = chatRoomService.save(theChatRoom);
-
+    @PatchMapping("/chatrooms/{chatRoomId}")
+    public ChatRoom updateChatRoom(@PathVariable int chatRoomId, @RequestBody ChatRoomRequestDTO chatRoomRequestDTO) {
+        ChatRoom dbChatRoom = chatRoomService.updateChatRoom(chatRoomId, chatRoomRequestDTO);
         return dbChatRoom;
     }
 

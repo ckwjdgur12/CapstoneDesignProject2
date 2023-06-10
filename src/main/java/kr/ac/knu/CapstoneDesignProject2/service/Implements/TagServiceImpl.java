@@ -38,7 +38,18 @@ public class TagServiceImpl implements TagService {
         }
 
         return theTag;
+    }
 
+    public Tag findByTag(String tag){
+        Optional<Tag> result = tagRepository.findByTag(tag);
+
+        Tag theTag = null;
+
+        if (result.isPresent()) {
+            theTag = result.get();
+        }
+
+        return theTag;
     }
 
     @Override
@@ -50,6 +61,5 @@ public class TagServiceImpl implements TagService {
     public void deleteById(int theId) {
         tagRepository.deleteById(theId);
     }
-
 
 }
