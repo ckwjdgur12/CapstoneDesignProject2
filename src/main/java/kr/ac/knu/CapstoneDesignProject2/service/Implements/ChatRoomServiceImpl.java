@@ -1,17 +1,16 @@
 package kr.ac.knu.CapstoneDesignProject2.service.Implements;
 
 import kr.ac.knu.CapstoneDesignProject2.dao.ChatRoomRepository;
+import kr.ac.knu.CapstoneDesignProject2.dao.MyChatRoomRepository;
 import kr.ac.knu.CapstoneDesignProject2.dao.TagRepository;
 import kr.ac.knu.CapstoneDesignProject2.dto.request.ChatRoomRequestDTO;
 import kr.ac.knu.CapstoneDesignProject2.dto.response.ChatRoomDTO;
-import kr.ac.knu.CapstoneDesignProject2.entity.Category;
-import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoom;
-import kr.ac.knu.CapstoneDesignProject2.entity.ChatRoomTag;
-import kr.ac.knu.CapstoneDesignProject2.entity.Tag;
+import kr.ac.knu.CapstoneDesignProject2.entity.*;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomService;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.ChatRoomTagService;
 import kr.ac.knu.CapstoneDesignProject2.service.Interfaces.TagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,11 +24,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     private ChatRoomRepository chatRoomRepository;
     private TagService tagService;
     private ChatRoomTagService chatRoomTagService;
+    private MyChatRoomRepository myChatRoomRepository;
 
-    public ChatRoomServiceImpl(ChatRoomRepository chatRoomRepository, TagService tagService, ChatRoomTagService chatRoomTagService) {
+    public ChatRoomServiceImpl(ChatRoomRepository chatRoomRepository, TagService tagService, ChatRoomTagService chatRoomTagService, MyChatRoomRepository myChatRoomRepository) {
         this.chatRoomRepository = chatRoomRepository;
         this.tagService = tagService;
         this.chatRoomTagService = chatRoomTagService;
+        this.myChatRoomRepository = myChatRoomRepository;
     }
 
     @Override
@@ -115,6 +116,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         );
 
         theChatRoom = chatRoomRepository.save(theChatRoom);
+
+        MyChatRoom myChatRoom = new MyChatRoom(
+                theChatRoom.getTheUser(),
+                theChatRoom,
+                0
+        );
+        myChatRoomRepository.save(myChatRoom);
 
         for (String tag : chatRoomRequestDTO.getTags()){
             Tag existingTag = tagService.findByTag(tag);
